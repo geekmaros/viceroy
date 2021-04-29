@@ -1,10 +1,6 @@
 <template>
   <section class="tv">
-    <HorizontalTreeView
-      :node="root"
-      :draggable="true"
-      class="node-wrapper"
-    ></HorizontalTreeView>
+    <HorizontalTreeView :node="root" class="node-wrapper"></HorizontalTreeView>
   </section>
 </template>
 
@@ -17,52 +13,45 @@ export default {
   data() {
     return {
       root: {
-        id: uuidv4(),
-        name: "Viceroy",
+        NodeID: uuidv4(),
+        nodeLabel: "Viceroy",
         children: [
           {
-            id: uuidv4(),
-            name: "irena",
-            role: "Human Resource",
+            NodeID: uuidv4(),
+            nodeLabel: "irena",
             children: [
               {
-                id: uuidv4(),
-                name: "fred",
-                role: "Marketing Intern",
+                NodeID: uuidv4(),
+                nodeLabel: "fred",
               },
               {
-                id: uuidv4(),
-                name: "Eva",
-                role: "Ads Manager",
+                NodeID: uuidv4(),
+                nodeLabel: "Eva",
               },
             ],
           },
           {
-            id: uuidv4(),
-            name: "mayank",
-            role: "Tech Lead",
+            NodeID: uuidv4(),
+            nodeLabel: "mayank",
             children: [
               {
-                id: uuidv4(),
-                name: "abdul",
-                role: "Frontend Developer",
+                NodeID: uuidv4(),
+                nodeLabel: "abdul",
+
                 children: [
                   {
-                    id: uuidv4(),
-                    name: "Michael",
-                    role: "Frontend Intern I",
+                    NodeID: uuidv4(),
+                    nodeLabel: "Michael",
                   },
                   {
-                    id: uuidv4(),
-                    name: "Lovelace",
-                    role: "Frontend Intern  II",
+                    NodeID: uuidv4(),
+                    nodeLabel: "Lovelace",
                   },
                 ],
               },
               {
-                id: uuidv4(),
-                name: "steve",
-                role: "Backend Developer",
+                NodeID: uuidv4(),
+                nodeLabel: "steve",
               },
             ],
           },
@@ -75,14 +64,13 @@ export default {
 
 <style lang="scss">
 .tv {
-  margin: 10rem 0 0 10rem;
+  margin: 10rem 5rem 0 10rem;
   width: 100%;
-
   transition: all 0.09s ease-in-out;
 
   .parent {
   }
-  .child {
+  .child-node {
     max-width: max-content;
     display: flex;
     margin: 20px;
@@ -107,6 +95,7 @@ export default {
     transition: all 0.09s ease-in-out;
     background-color: white;
     height: max-content;
+    width: 200px;
     padding: 10px 15px;
     text-align: center;
     border-radius: 3px;
@@ -124,7 +113,7 @@ export default {
     margin-right: -20px;
     position: absolute;
     right: 0;
-    transform: scale(1.6);
+    transform: scale(1.4);
     font-weight: bold;
     color: #777777;
   }

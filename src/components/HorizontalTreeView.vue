@@ -1,32 +1,39 @@
 <template>
   <section
+    :id="node.NodeID"
     class="node-wrapper"
     draggable="true"
     @dragover="dropNode"
     @dragover.prevent
+    @dragstart="dragNode"
+    @dragover.stop
   >
     <!--    div below indicates each individual elements-->
-    <div
-      @click="expanded = !expanded"
-      :style="{ 'margin-left': depth * 20 + 'px' }"
-      class="main"
+    <!--          :style="{ 'margin-left': depth * 20 + 'px' }"
+
+     draggable="true"
+      @dragstart="dragNode"
+      @dragover.stop
+
       draggable="true"
       @dragstart="dragNode"
       @dragover.stop
-    >
+    -->
+    <div @click="expanded = !expanded" class="main">
       <span class="node-btn" v-show="node.children">{{
         expanded ? "&#8854;" : "&#8853;"
       }}</span>
-      {{ node.name }}
+      {{ node.nodeLabel }}
       <span v-if="node.role" class="sm-text">({{ node.role }})</span>
     </div>
-    <div v-if="expanded" class="children-wrapper">
+    <div class="children-wrapper">
       <HorizontalTreeView
+        v-show="expanded"
         v-for="child in node.children"
-        :key="child.id"
+        :key="child.NodeID"
         :node="child"
         :depth="depth + 1"
-        class="child"
+        class="child-node"
       />
     </div>
   </section>
@@ -54,16 +61,18 @@ export default {
   components: {},
   methods: {
     dropNode: (e) => {
-      console.log(e);
-      // const node_id = e.dataTransfer.getData("node_id");
-      // const node = document.getElementById(node_id);
+      const node_id = e.dataTransfer.getData("text");
+      const node = document.getElementById(node_id);
+      console.log(node);
       // node.style.display = "block";
       // e.target.appendChild(node);
     },
     dragNode: (e) => {
       const { target } = e;
-      e.dataTransfer.setData("node_id", target.id);
-      // console.log(e + "DRAG" + target.id);
+      console.log("Target ID" + target.id);
+      e.dataTransfer.setData("text/plain", target.id);
+      console.log(e.dataTransfer);
+
       // setTimeout(() => {
       //   target.style.display = "none";
       // }, 0);
